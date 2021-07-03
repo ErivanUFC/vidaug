@@ -124,13 +124,15 @@ class Downsample(object):
         ratio (float): Downsampling ratio in [0.0 <= ratio <= 1.0].
     """
     def __init__(self , ratio=1.0):
-        if ratio < 0.0 or ratio > 1.0:
-            raise TypeError('ratio should be in [0.0 <= ratio <= 1.0]. ' +
-                            'Please use upsampling for ratio > 1.0')
+        # if ratio < 0.0 or ratio > 1.0:
+        #    raise TypeError('ratio should be in [0.0 <= ratio <= 1.0]. ' +
+        #                    'Please use upsampling for ratio > 1.0')
         self.ratio = ratio
 
     def __call__(self, clip):
-        nb_return_frame = np.floor(self.ratio * len(clip))
+        up_factor = random.uniform(1, int(1 - self.ratio)) 
+        
+        nb_return_frame = np.floor(up_factor * len(clip))
         return_ind = [int(i) for i in np.linspace(1, len(clip), num=nb_return_frame)]
 
         return [clip[i-1] for i in return_ind]
@@ -150,7 +152,9 @@ class Upsample(object):
         self.ratio = ratio
 
     def __call__(self, clip):
-        nb_return_frame = np.floor(self.ratio * len(clip))
+        up_factor = random.uniform(1, int(1 + self.ratio)) 
+        
+        nb_return_frame = np.floor(up_factor * len(clip))
         return_ind = [int(i) for i in np.linspace(1, len(clip), num=nb_return_frame)]
 
         return [clip[i-1] for i in return_ind]
