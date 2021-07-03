@@ -152,7 +152,7 @@ class Upsample(object):
         self.ratio = ratio
 
     def __call__(self, clip):
-        up_factor = random.uniform(1, int(1 + self.ratio)) 
+        up_factor = random.uniform(1, 1 + self.ratio) 
         
         nb_return_frame = np.floor(up_factor * len(clip))
         return_ind = [int(i) for i in np.linspace(1, len(clip), num=nb_return_frame)]
