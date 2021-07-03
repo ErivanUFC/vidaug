@@ -79,7 +79,7 @@ class RandomResize(object):
 
     def __call__(self, clip):
         # scaling_factor = random.uniform(1 - self.rate, 1 + self.rate)
-        scaling_factor = 1 
+        scaling_factor = random.uniform(1, 1 + self.rate)
 
         if isinstance(clip[0], np.ndarray):
             im_h, im_w, im_c = clip[0].shape
