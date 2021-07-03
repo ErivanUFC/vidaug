@@ -78,7 +78,8 @@ class RandomResize(object):
         self.interpolation = interp
 
     def __call__(self, clip):
-        scaling_factor = random.uniform(1 - self.rate, 1 + self.rate)
+        # scaling_factor = random.uniform(1 - self.rate, 1 + self.rate)
+        scaling_factor = 1 
 
         if isinstance(clip[0], np.ndarray):
             im_h, im_w, im_c = clip[0].shape
